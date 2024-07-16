@@ -8,6 +8,10 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 # mathplotlib
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.animation import FuncAnimation
+
 from datetime import date
 from google.oauth2.credentials import Credentials
 
@@ -23,6 +27,20 @@ sheet = workbook.worksheet("Chulada Graphing Data")
 # value = sheet.cell(1, 2).value
 # print(value)
 
+class Canvas(FigureCanvas):
+    def __init__(self,parent):
+        fig, self.ax = plt.subplots(figsize=(5,4), dpi = 200)
+        super().__init__(fig)
+        self.setParent(parent)
+
+        x = sheet.col_values(1)[1:][::-1]
+        y = list(map(float,sheet.col_values(8)[1:]))
+
+        self.ax.plot(x,y)
+        
+        self.ax.axes.xaxis.set_ticklabels([])
+        self.ax.set(xlabel='Date',ylabel='Ev value',title='Ev value by date graph')
+        self.ax.grid()
 
 class App(QMainWindow):
 
@@ -86,12 +104,19 @@ class App(QMainWindow):
         self.showlable.setText("")
         self.showlable.move(200, 255)
 
-        # Create a button in the window
-        self.button = QPushButton("Show text", self)
-        self.button.move(190, 280)
+        self.notes = QLabel(self)
+        self.notes.setText("Please Open and Reopen the program to Update the Graph [for now]")
+        self.notes.move(60,350)
+        self.notes.resize(450,16)
 
-        # connect button to function on_click
+        # Create a button in the window
+        self.button = QPushButton("Show Value", self)
+        self.button.move(190, 280)
         self.button.clicked.connect(self.on_click)
+
+        self.chart = Canvas(self)
+        self.chart.move(540,40)
+
         self.show()
 
     @pyqtSlot()
