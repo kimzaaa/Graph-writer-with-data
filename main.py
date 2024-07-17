@@ -52,6 +52,7 @@ class App(QMainWindow):
         self.width = 1600
         self.height = 900
         self.initUI()
+        self.setStyleSheet("background-color: #303030;") 
 
     def initUI(self):
         self.setWindowTitle(self.title)
@@ -64,6 +65,7 @@ class App(QMainWindow):
         self.t = QLineEdit(self)
         self.t.move(20, 40)
         self.t.resize(200, 30)
+        self.tlable.setStyleSheet("color:white;")
 
         self.stlable = QLabel(self)
         self.stlable.setText("Enter ΣT Value")
@@ -71,6 +73,7 @@ class App(QMainWindow):
         self.st = QLineEdit(self)
         self.st.move(260, 40)
         self.st.resize(200, 30)
+        self.stlable.setStyleSheet("color:white;")
 
         self.nlable = QLabel(self)
         self.nlable.setText("Enter N Value")
@@ -78,6 +81,7 @@ class App(QMainWindow):
         self.n = QLineEdit(self)
         self.n.move(20, 120)
         self.n.resize(200, 30)
+        self.nlable.setStyleSheet("color:white;")
 
         self.snlable = QLabel(self)
         self.snlable.setText("Enter Σñ Value")
@@ -85,6 +89,7 @@ class App(QMainWindow):
         self.sn = QLineEdit(self)
         self.sn.move(260, 120)
         self.sn.resize(200, 30)
+        self.snlable.setStyleSheet("color:white;")
 
         self.flable = QLabel(self)
         self.flable.setText("Enter ƒ Value")
@@ -92,6 +97,7 @@ class App(QMainWindow):
         self.f = QLineEdit(self)
         self.f.move(20, 200)
         self.f.resize(200, 30)
+        self.flable.setStyleSheet("color:white;")
 
         self.qlable = QLabel(self)
         self.qlable.setText("Enter Q Value")
@@ -99,20 +105,24 @@ class App(QMainWindow):
         self.q = QLineEdit(self)
         self.q.move(260, 200)
         self.q.resize(200, 30)
+        self.qlable.setStyleSheet("color:white;")
 
         self.showlable = QLabel(self)
         self.showlable.setText("")
         self.showlable.move(200, 255)
+        self.showlable.setStyleSheet("color:white;")
 
         self.notes = QLabel(self)
         self.notes.setText("Please Open and Reopen the program to Update the Graph [for now]")
         self.notes.move(60,350)
         self.notes.resize(450,16)
+        self.notes.setStyleSheet("color:white")
 
         # Create a button in the window
         self.button = QPushButton("Show Value", self)
         self.button.move(190, 280)
         self.button.clicked.connect(self.on_click)
+        self.button.setStyleSheet("color:white; border-radius : 50; border : 2px solid black")
 
         self.chart = Canvas(self)
         self.chart.move(540,40)
